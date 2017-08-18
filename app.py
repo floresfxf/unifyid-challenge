@@ -78,7 +78,7 @@ def main():
             size=(128, 128),
             data=''.join([pack('B', x) for x in colors]),
             )
-    image.save('img','JPEG')#save image as JPEG, chose to override format parameter
+    image.save('img','JPEG')#save image as JPEG, chose to override format parameter to be safe
     print "Successfully saved"
     
     
