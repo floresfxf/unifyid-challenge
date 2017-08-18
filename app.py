@@ -73,7 +73,6 @@ def main():
         colors+= byteArr
         total -= max_reqs
     colors += IntegerGeneratorList(total, 0, 255) #get remaining amount of numbers for byte array
-    print colors
     image = Image.frombytes(#convert from byte array to image
             'RGB',
             size=(128, 128),
