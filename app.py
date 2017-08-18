@@ -3,7 +3,7 @@ from struct import pack
 from PIL import Image
 from numpy import random #used only for testing/debugging PIL
 
-
+#General limitation found in docs
 MIN_MAX_LEN = 10000000000
 MIN_NUM_LEN = 1
 MAX_NUM_LEN = 100000
@@ -39,10 +39,12 @@ def IntegerGeneratorList(num,nmin,nmax,col=1,base=10,rnd="new"):#set base to 10 
         req.add_header('User-Agent',useragent)#IMPORTANT: Including headers as specified in docs
         opener = urllib2.build_opener()
         u = opener.open(req)
-        map(lambda i: map(lambda j: numlst.append(float(j)),i.split()),u.readlines())#Processes response into usable array
+        map(lambda i: map(lambda j: numlst.append(int(j)),i.split()),u.readlines())#Processes response into usable array
         return numlst
+
+    
 def QuotaChecker(ipaddr=None): #"Client to examine remaining quota at regular interval" - Guidelines
-        if ipaddr == None:  #quote will appear on the first index of response
+        if ipaddr == None:  #Hopfully checking quota before every request is regular enough of an interval
             url = "http://www.random.org/quota/?format=plain"
             req = urllib2.Request(url)
             req.add_header('User-Agent',useragent)
@@ -55,7 +57,9 @@ def QuotaChecker(ipaddr=None): #"Client to examine remaining quota at regular in
             req.add_header('User-Agent',useragent)
             opener = urllib2.build_opener()
             u = opener.open(req)
-            return float(u.readlines()[0])
+            return int(u.readlines()[0])
+
+        
 def main():
     colors = []
     width = 128
@@ -79,5 +83,5 @@ def main():
     print "Successfully saved"
     
     
-if __name__== "__main__":
+if __name__== "__main__": #initilize main to run on run
   main()
